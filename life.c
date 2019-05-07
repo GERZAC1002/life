@@ -3,6 +3,7 @@
 
 #define SPALTE 80
 #define REIHE 25
+#define ZUFALL 10
 
 int main(int argc, char *argv[]){
 	int generation = 0;
@@ -30,7 +31,7 @@ int main(int argc, char *argv[]){
 
 	for(int x = 0; x <= SPALTE; x++){
 		for(int y = 0; y <= REIHE; y++){
-			zufall = rand()%10;
+			zufall = rand()%ZUFALL;
 			if(zufall == 1){
 				feld[x][y] = 1;
 			}else{	
@@ -100,6 +101,7 @@ int main(int argc, char *argv[]){
 		}
 
 		generation = generation +1;
+		system("clear");
 
 		for(int y = 0; y <= REIHE;y++){
                 	for(int x = 0; x <= SPALTE; x++){
