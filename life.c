@@ -4,27 +4,19 @@
 #define SPALTE 80
 #define REIHE 25
 #define ZUFALL 10
+#define AKTUALISIERE 50000
 
 int main(int argc, char *argv[]){
 	int generation = 0;
-	int anzahl = 0;
 	int ueber = 0;
-	char ch;
 	char nachbarn = 0;
-	char zufall;
+	char zufall = 0;
 	char feld[SPALTE][REIHE];
 	char feld2[SPALTE][REIHE];
 	char feld3[SPALTE][REIHE];
-	char geburt_ueberleb[2][8] = {
+	char geburt_ueberleb[2][8] = {//Regeln für Geburt und Überleben Standard:3 und 2,3
 		{3,NULL,NULL,NULL,NULL,NULL,NULL,NULL},
 		{2,3,NULL,NULL,NULL,NULL,NULL,NULL}
-	};
-	char anfang[5][5] = {
-		{0,0,0,0,0},
-		{0,0,1,1,1},
-		{0,0,1,0,1},
-		{0,0,1,0,1},
-		{0,0,0,0,0}
 	};
 
 	srand(time(NULL));
@@ -41,7 +33,7 @@ int main(int argc, char *argv[]){
 		}
 	}
 
-	while(ch != 'q'){
+	while("Game of Life"){
 		for(int x = 0; x <= SPALTE-1; x++){
 			for(int y = 0; y <= REIHE-1;y++){
 				if(feld[x-1][y] == 1){
@@ -103,8 +95,8 @@ int main(int argc, char *argv[]){
 		generation = generation +1;
 		system("clear");
 
-		for(int y = 0; y <= REIHE;y++){
-                	for(int x = 0; x <= SPALTE; x++){
+		for(int y = 0; y <= REIHE-1;y++){
+                	for(int x = 0; x <= SPALTE-1; x++){
                 	        if(feld[x][y] == 0){
         	                        printf(" ");
 	                        }else{
@@ -114,7 +106,7 @@ int main(int argc, char *argv[]){
                 	printf("\n");
         	}
 		printf("\nGeneration: %i\n============================================================================================\n",generation);
-		ch = getchar();
+		usleep(AKTUALISIERE);
 	}
 
 	return 0;
