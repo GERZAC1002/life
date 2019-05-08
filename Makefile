@@ -3,6 +3,7 @@ CFLAGS = -Wall -lpthread -ffast-math -Os -s -fno-ident -fno-math-errno -ffunctio
 
 life:
 	$(CC) $(CFLAGS) -o life life.c
+	$(CC) $(CFLAGS) -o life_wrap life_wrap.c
 
 clean:
-	rm -f life
+	rm -f life life_wrap

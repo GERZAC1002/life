@@ -43,34 +43,30 @@ int main(int argc, char *argv[]){
 	while("Game of Life"){
 		for(int x = 0; x <= SPALTE-1; x++){
 			for(int y = 0; y <= REIHE-1;y++){
-				if(x != 0){
-					if(feld[x-1][y] == 1){
-						nachbarn = nachbarn +1;
-					}
-					if(feld[x-1][y-1] == 1 && y!=0){
-						nachbarn = nachbarn +1;
-					}
-					if(feld[x-1][y+1] == 1 && y!=REIHE-1){
-						nachbarn = nachbarn +1;
-					}
+				if(feld[x-1][y] == 1){
+					nachbarn = nachbarn +1;
 				}
-				if(feld[x][y-1] == 1 && y!=0){
+				if(feld[x-1][y-1] == 1){
+					nachbarn = nachbarn +1;
+				}
+				if(feld[x-1][y+1] == 1){
+					nachbarn = nachbarn +1;
+				}
+				if(feld[x][y-1] == 1){
                                         nachbarn = nachbarn +1;
                                 }
-				if(feld[x][y+1] == 1 && y != REIHE-1){
+				if(feld[x][y+1] == 1){
                                         nachbarn = nachbarn +1;
                                 }
-				if(x != SPALTE-1){
-					if(feld[x+1][y-1] == 1 && y != 0){
-        	                                nachbarn = nachbarn +1;
-                	                }
-					if(feld[x+1][y] == 1){
-                                	        nachbarn = nachbarn +1;
-	                                }
-					if(feld[x+1][y+1] == 1 && y != REIHE-1){
-                	                        nachbarn = nachbarn +1;
-                        	        }
-				}
+				if(feld[x+1][y-1] == 1){
+       	                                nachbarn = nachbarn +1;
+               	                }
+				if(feld[x+1][y] == 1){
+                               	        nachbarn = nachbarn +1;
+                                }
+				if(feld[x+1][y+1] == 1){
+               	                        nachbarn = nachbarn +1;
+                       	        }
 				if(feld[x][y] == 0){
 					for(int i=0;geburt_ueberleb[0][i]!=NULL;i++){
 						if(nachbarn == geburt_ueberleb[0][i]){
