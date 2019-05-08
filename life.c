@@ -1,48 +1,68 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define SPALTE 120
-#define REIHE 30
 #define ZUFALL 10
 #define AKTUALISIERE 50000
 
+int reihe = 30;
+int spalte = 120;
+
 void linie(){
-	for(int i = 0; i < SPALTE;i++){
+	for(int i = 0; i < spalte;i++){
 		printf("=");
 	}
 	printf("\n");
 }
 
+void fuellFeld(char feld[spalte][reihe], char zufall_an){
+	char zufall = 0;
+	srand(time(NULL));
+
+	for(int x = 0; x <= spalte; x++){
+		for(int y = 0; y <= reihe; y++){
+			if(zufall_an == 1){
+				zufall = rand()%ZUFALL;
+				if(zufall == 1){
+					feld[x][y] = 1;
+				}else{	
+					feld[x][y]=0;
+				}
+			}else{
+				feld[x][y] = 0;
+			}
+		}
+	}
+}
+
+void kopiereFeld(char feld1[spalte][reihe], char feld2[spalte][reihe]){
+	for(int x = 0; x <= spalte-1; x++){
+		for(int y = 0; y <= reihe-1; y++){
+			feld1[x][y] = feld2[x][y];
+		}
+	}
+}
 
 int main(int argc, char *argv[]){
+	printf("Eingabe Spalten(Terminalbreite):\n");
+	scanf("%d",&spalte);
+	printf("Eingabe Reihen(Terminallänge):\n");
+	scanf("%d",&reihe);
 	int generation = 0;
 	int ueber = 0;
 	char nachbarn = 0;
-	char zufall = 0;
-	char feld[SPALTE][REIHE];
-	char feld2[SPALTE][REIHE];
+	char feld[spalte][reihe];
+	char feld2[spalte][reihe];
 	char geburt_ueberleb[2][8] = {//Regeln für Geburt und Überleben Standard:3 und 2,3
 		{3,NULL,NULL,NULL,NULL,NULL,NULL,NULL},
 		{2,3,NULL,NULL,NULL,NULL,NULL,NULL}
 	};
 
-	srand(time(NULL));
-
-	for(int x = 0; x <= SPALTE; x++){
-		for(int y = 0; y <= REIHE; y++){
-			zufall = rand()%ZUFALL;
-			if(zufall == 1){
-				feld[x][y] = 1;
-			}else{	
-				feld[x][y]=0;
-			}
-			feld2[x][y]=0;
-		}
-	}
+	fuellFeld(&feld,1);
+	fuellFeld(&feld2,0);
 
 	while("Game of Life"){
-		for(int x = 0; x <= SPALTE-1; x++){
-			for(int y = 0; y <= REIHE-1;y++){
+		for(int x = 0; x <= spalte-1; x++){
+			for(int y = 0; y <= reihe-1;y++){
 				if(x != 0){
 					if(feld[x-1][y] == 1){
 						nachbarn = nachbarn +1;
@@ -50,24 +70,24 @@ int main(int argc, char *argv[]){
 					if(feld[x-1][y-1] == 1 && y!=0){
 						nachbarn = nachbarn +1;
 					}
-					if(feld[x-1][y+1] == 1 && y!=REIHE-1){
+					if(feld[x-1][y+1] == 1 && y!=reihe-1){
 						nachbarn = nachbarn +1;
 					}
 				}
 				if(feld[x][y-1] == 1 && y!=0){
                                         nachbarn = nachbarn +1;
                                 }
-				if(feld[x][y+1] == 1 && y != REIHE-1){
+				if(feld[x][y+1] == 1 && y != reihe-1){
                                         nachbarn = nachbarn +1;
                                 }
-				if(x != SPALTE-1){
+				if(x != spalte-1){
 					if(feld[x+1][y-1] == 1 && y != 0){
         	                                nachbarn = nachbarn +1;
                 	                }
 					if(feld[x+1][y] == 1){
                                 	        nachbarn = nachbarn +1;
 	                                }
-					if(feld[x+1][y+1] == 1 && y != REIHE-1){
+					if(feld[x+1][y+1] == 1 && y != reihe-1){
                 	                        nachbarn = nachbarn +1;
                         	        }
 				}
@@ -96,18 +116,14 @@ int main(int argc, char *argv[]){
 		}
 		printf("\n");
 
-		for(int x = 0; x <= SPALTE-1; x++){
-			for(int y = 0; y <= REIHE-1; y++){
-				feld[x][y] = feld2[x][y];
-				feld2[x][y] = 0;
-			}
-		}
+		kopiereFeld(&feld,&feld2);
+		fuellFeld(&feld2,0);
 
 		generation = generation +1;
 		system("clear");
 
-		for(int y = 0; y <= REIHE-1;y++){
-                	for(int x = 0; x <= SPALTE-1; x++){
+		for(int y = 0; y <= reihe-1;y++){
+                	for(int x = 0; x <= spalte-1; x++){
                 	        if(feld[x][y] == 0){
         	                        printf(" ");
 	                        }else{
