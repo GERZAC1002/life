@@ -49,10 +49,10 @@ int main(int argc, char *argv[]){
 					if(feld[x-1][y] == 1){
 						nachbarn = nachbarn +1;
 					}
-					if(feld[x-1][y-1] == 1){
+					if(feld[x-1][y-1] == 1 && y!=0){
 						nachbarn = nachbarn +1;
 					}
-					if(feld[x-1][y+1] == 1){
+					if(feld[x-1][y+1] == 1 && y!=REIHE-1){
 						nachbarn = nachbarn +1;
 					}
 				}
@@ -62,14 +62,14 @@ int main(int argc, char *argv[]){
 				if(feld[x][y+1] == 1 && y != REIHE-1){
                                         nachbarn = nachbarn +1;
                                 }
-				if(x != REIHE-1){
-					if(feld[x+1][y-1] == 1){
+				if(x != SPALTE-1){
+					if(feld[x+1][y-1] == 1 && y != 0){
         	                                nachbarn = nachbarn +1;
                 	                }
 					if(feld[x+1][y] == 1){
                                 	        nachbarn = nachbarn +1;
 	                                }
-					if(feld[x+1][y+1] == 1){
+					if(feld[x+1][y+1] == 1 && y != REIHE-1){
                 	                        nachbarn = nachbarn +1;
                         	        }
 				}
