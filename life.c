@@ -1,10 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define SPALTE 80
-#define REIHE 25
+#define SPALTE 120
+#define REIHE 30
 #define ZUFALL 10
 #define AKTUALISIERE 50000
+
+void linie(){
+	for(int i = 0; i < SPALTE;i++){
+		printf("=");
+	}
+	printf("\n");
+}
+
 
 int main(int argc, char *argv[]){
 	int generation = 0;
@@ -30,36 +38,41 @@ int main(int argc, char *argv[]){
 				feld[x][y]=0;
 			}
 			feld2[x][y]=0;
+			feld3[x][y]=0;
 		}
 	}
 
 	while("Game of Life"){
 		for(int x = 0; x <= SPALTE-1; x++){
 			for(int y = 0; y <= REIHE-1;y++){
-				if(feld[x-1][y] == 1){
-					nachbarn = nachbarn +1;
+				if(x != 0){
+					if(feld[x-1][y] == 1){
+						nachbarn = nachbarn +1;
+					}
+					if(feld[x-1][y-1] == 1){
+						nachbarn = nachbarn +1;
+					}
+					if(feld[x-1][y+1] == 1){
+						nachbarn = nachbarn +1;
+					}
 				}
-				if(feld[x-1][y-1] == 1){
-					nachbarn = nachbarn +1;
+				if(feld[x][y-1] == 1 && y!=0){
+                                        nachbarn = nachbarn +1;
+                                }
+				if(feld[x][y+1] == 1 && y != REIHE-1){
+                                        nachbarn = nachbarn +1;
+                                }
+				if(x != REIHE-1){
+					if(feld[x+1][y-1] == 1){
+        	                                nachbarn = nachbarn +1;
+                	                }
+					if(feld[x+1][y] == 1){
+                                	        nachbarn = nachbarn +1;
+	                                }
+					if(feld[x+1][y+1] == 1){
+                	                        nachbarn = nachbarn +1;
+                        	        }
 				}
-				if(feld[x-1][y+1] == 1){
-					nachbarn = nachbarn +1;
-				}
-				if(feld[x][y-1] == 1){
-                                        nachbarn = nachbarn +1;
-                                }
-				if(feld[x][y+1] == 1){
-                                        nachbarn = nachbarn +1;
-                                }
-				if(feld[x+1][y-1] == 1){
-                                        nachbarn = nachbarn +1;
-                                }
-				if(feld[x+1][y] == 1){
-                                        nachbarn = nachbarn +1;
-                                }
-				if(feld[x+1][y+1] == 1){
-                                        nachbarn = nachbarn +1;
-                                }
 				if(feld[x][y] == 0){
 					for(int i=0;geburt_ueberleb[0][i]!=NULL;i++){
 						if(nachbarn == geburt_ueberleb[0][i]){
@@ -85,6 +98,15 @@ int main(int argc, char *argv[]){
 		}
 		printf("\n");
 
+		for(int i;i <= REIHE-1;i++){
+			feld2[SPALTE-1][i] = 0;
+			feld2[0][i] = 0;
+		}
+		for(int i;i <= SPALTE-1;i++){
+			feld2[i][REIHE-1] = 0;
+			feld2[i][0] = 0;
+		}
+
 		for(int x = 0; x <= SPALTE-1; x++){
 			for(int y = 0; y <= REIHE-1; y++){
 				feld[x][y] = feld2[x][y];
@@ -105,7 +127,8 @@ int main(int argc, char *argv[]){
 	                }
                 	printf("\n");
         	}
-		printf("\nGeneration: %i\n============================================================================================\n",generation);
+		printf("\nGeneration: %i\n",generation);
+		linie();
 		usleep(AKTUALISIERE);
 	}
 
