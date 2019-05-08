@@ -42,7 +42,6 @@ void kopiereFeld(char feld1[spalte][reihe], char feld2[spalte][reihe]){
 	}
 }
 
-
 int main(int argc, char *argv[]){
 	printf("Eingabe Spalten(Terminalbreite):\n");
 	scanf("%d",&spalte);
@@ -51,15 +50,12 @@ int main(int argc, char *argv[]){
 	int generation = 0;
 	int ueber = 0;
 	char nachbarn = 0;
-	char zufall = 0;
 	char feld[spalte][reihe];
 	char feld2[spalte][reihe];
 	char geburt_ueberleb[2][8] = {//Regeln für Geburt und Überleben Standard:3 und 2,3
 		{3,NULL,NULL,NULL,NULL,NULL,NULL,NULL},
 		{2,3,NULL,NULL,NULL,NULL,NULL,NULL}
 	};
-
-	srand(time(NULL));
 
 	fuellFeld(&feld,1);
 	fuellFeld(&feld2,0);
@@ -77,20 +73,20 @@ int main(int argc, char *argv[]){
 					nachbarn = nachbarn +1;
 				}
 				if(feld[x][y-1] == 1){
-                                        nachbarn = nachbarn +1;
-                                }
+					nachbarn = nachbarn +1;
+				}
 				if(feld[x][y+1] == 1){
-                                        nachbarn = nachbarn +1;
-                                }
+					nachbarn = nachbarn +1;
+				}
 				if(feld[x+1][y-1] == 1){
-       	                                nachbarn = nachbarn +1;
-               	                }
+					nachbarn = nachbarn +1;
+				}
 				if(feld[x+1][y] == 1){
-                               	        nachbarn = nachbarn +1;
-                                }
+					nachbarn = nachbarn +1;
+				}
 				if(feld[x+1][y+1] == 1){
-               	                        nachbarn = nachbarn +1;
-                       	        }
+					nachbarn = nachbarn +1;
+				}
 				if(feld[x][y] == 0){
 					for(int i=0;geburt_ueberleb[0][i]!=NULL;i++){
 						if(nachbarn == geburt_ueberleb[0][i]){
@@ -123,14 +119,14 @@ int main(int argc, char *argv[]){
 		system("clear");
 
 		for(int y = 0; y <= reihe-1;y++){
-                	for(int x = 0; x <= spalte-1; x++){
-                	        if(feld[x][y] == 0){
-        	                        printf(" ");
-	                        }else{
+			for(int x = 0; x <= spalte-1; x++){
+				if(feld[x][y] == 0){
+					printf(" ");
+				}else{
 					printf("*");
-                		}
+				}
 			}
-               		printf("\n");
+			printf("\n");
 		}
 		printf("\nGeneration: %i\n",generation);
 		linie();

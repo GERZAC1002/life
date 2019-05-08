@@ -75,21 +75,21 @@ int main(int argc, char *argv[]){
 					}
 				}
 				if(feld[x][y-1] == 1 && y!=0){
-                                        nachbarn = nachbarn +1;
-                                }
+					nachbarn = nachbarn +1;
+				}
 				if(feld[x][y+1] == 1 && y != reihe-1){
-                                        nachbarn = nachbarn +1;
-                                }
+					nachbarn = nachbarn +1;
+				}
 				if(x != spalte-1){
 					if(feld[x+1][y-1] == 1 && y != 0){
-        	                                nachbarn = nachbarn +1;
-                	                }
+						nachbarn = nachbarn +1;
+					}
 					if(feld[x+1][y] == 1){
-                                	        nachbarn = nachbarn +1;
-	                                }
+						nachbarn = nachbarn +1;
+					}
 					if(feld[x+1][y+1] == 1 && y != reihe-1){
-                	                        nachbarn = nachbarn +1;
-                        	        }
+						nachbarn = nachbarn +1;
+					}
 				}
 				if(feld[x][y] == 0){
 					for(int i=0;geburt_ueberleb[0][i]!=NULL;i++){
@@ -123,15 +123,15 @@ int main(int argc, char *argv[]){
 		system("clear");
 
 		for(int y = 0; y <= reihe-1;y++){
-                	for(int x = 0; x <= spalte-1; x++){
-                	        if(feld[x][y] == 0){
-        	                        printf(" ");
-	                        }else{
-                	                printf("*");
-        	                }
-	                }
-                	printf("\n");
-        	}
+			for(int x = 0; x <= spalte-1; x++){
+				if(feld[x][y] == 0){
+					printf(" ");
+				}else{
+					printf("*");
+				}
+			}
+			printf("\n");
+		}
 		printf("\nGeneration: %i\n",generation);
 		linie();
 		usleep(AKTUALISIERE);
