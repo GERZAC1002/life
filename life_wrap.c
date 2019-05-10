@@ -43,19 +43,38 @@ void kopiereFeld(char feld1[spalte][reihe], char feld2[spalte][reihe]){
 }
 
 int main(int argc, char *argv[]){
-	printf("Eingabe Spalten(Terminalbreite):\n");
-	scanf("%d",&spalte);
-	printf("Eingabe Reihen(Terminallänge):\n");
-	scanf("%d",&reihe);
+	if(argc < 2){
+		printf("Eingabe Spalten(Terminalbreite):\n");
+		scanf("%d",&spalte);
+		printf("Eingabe Reihen(Terminallänge):\n");
+		scanf("%d",&reihe);
+	}else{
+		spalte = atoi(argv[1]);
+		reihe = atoi(argv[2]);
+	}
 	int generation = 0;
 	int ueber = 0;
+	int c = 0;
 	char nachbarn = 0;
 	char feld[spalte][reihe];
 	char feld2[spalte][reihe];
 	char geburt_ueberleb[2][8] = {//Regeln für Geburt und Überleben Standard:3 und 2,3
-		{3,NULL,NULL,NULL,NULL,NULL,NULL,NULL},
-		{2,3,NULL,NULL,NULL,NULL,NULL,NULL}
+		{NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL},
+		{NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL}
 	};
+
+	FILE *regel;
+	regel = fopen("rule.life", "r");
+	if(regel){
+		for(int i = 0; i <= 1; i++){
+			int u =0;
+			while((c=getc(regel))!='\n'){
+				geburt_ueberleb[i][u] = c -48;
+				printf("%c\n",c);
+				u = u+1;
+			}
+		}
+	}
 
 	fuellFeld(&feld,1);
 	fuellFeld(&feld2,0);
