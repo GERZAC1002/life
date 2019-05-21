@@ -2,6 +2,7 @@
 #include <stdlib.h>
 
 #define ZUFALL 5
+#define GLEICH 10
 #define AKTUALISIERE 50000
 
 int reihe = 30;
@@ -52,6 +53,9 @@ int main(int argc, char *argv[]){
 		spalte = atoi(argv[1]);
 		reihe = atoi(argv[2]);
 	}
+	int anzahl = 0;
+	int letzte_anzahl = 0;
+	int ident = 0;
 	int generation = 0;
 	int ueber = 0;
 	int c=0;
@@ -146,11 +150,26 @@ int main(int argc, char *argv[]){
 					printf(" ");
 				}else{
 					printf("*");
+					anzahl = anzahl +1;
 				}
 			}
 			printf("\n");
 		}
-		printf("\nGeneration: %i\n",generation);
+		printf("\nGeneration: %i\tAnzahl: %i\n",generation,anzahl);
+		if(letzte_anzahl == anzahl){
+			ident = ident +1;
+		}else{
+			ident = 0;
+		}
+
+		if(anzahl == 0 /*|| ident == GLEICH*/){
+		        fuellFeld(&feld,1);
+		        fuellFeld(&feld2,0);
+			generation = 0;
+			ident = 0;
+		}
+		letzte_anzahl = anzahl;
+		anzahl = 0;
 		linie();
 		usleep(AKTUALISIERE);
 	}
