@@ -2,11 +2,10 @@
 #include <stdlib.h>
 
 #define ZUFALL 5
-#define GLEICH 10
 #define AKTUALISIERE 50000
 
-int reihe = 30;
-int spalte = 120;
+int reihe = 1;
+int spalte = 1;
 
 void linie(){
 	for(int i = 0; i < spalte;i++){
@@ -94,8 +93,30 @@ int main(int argc, char *argv[]){
 		}
 	}
 	//exit(0);
-	fuellFeld(&feld,1);
-	fuellFeld(&feld2,0);
+
+	char zufall = 0;
+	srand(time(NULL));
+
+	for(int x = 0; x <= spalte; x++){
+		for(int y = 0; y <= reihe; y++){
+			zufall = rand()%ZUFALL;
+			if(zufall == 1){
+				feld[x][y] = 1;
+			}else{	
+				feld[x][y]=0;
+			}
+		}
+	}
+
+	zufall = 0;
+	srand(time(NULL));
+
+	for(int x = 0; x <= spalte; x++){
+		for(int y = 0; y <= reihe; y++){
+				feld[x][y] = 0;
+		}
+	}
+
 	printf("Felder gefüllt\n");
 
 	while("Game of Life"){
