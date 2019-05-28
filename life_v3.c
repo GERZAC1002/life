@@ -178,7 +178,7 @@ int main(int argc, char *argv[]){
 			ident = 0;
 		}
 
-		if(anzahl == 0 /*|| ident == GLEICH*/){
+		if(anzahl == 0 || ident == 10){
 				for(int x = 0; x <= spalte; x++){
 					for(int y = 0; y <= reihe; y++){
 						zufall = rand()%ZUFALL;
