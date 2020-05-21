@@ -48,9 +48,9 @@ int main(int argc, char *argv[]){
 	}
 	/*char feld[spalte][reihe];
 	char feld2[spalte][reihe];*/
-	char geburt_ueberleb[2][8] = {//Regeln für Geburt und Überleben Standard:3 und 2,3
-		{NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL},
-		{NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL}
+	char geburt_ueberleb[2][10] = {//Regeln für Geburt und Überleben Standard:3 und 2,3
+		{127,127,127,127,127,127,127,127,127,127},
+		{127,127,127,127,127,127,127,127,127,127}
 	};
 
 	FILE *regel;
@@ -121,13 +121,13 @@ int main(int argc, char *argv[]){
 					}
 				}
 				if(feld[x][y] == 0){
-					for(int i=0;geburt_ueberleb[0][i]!=NULL;i++){
+					for(int i=0;geburt_ueberleb[0][i]!=127;i++){
 						if(nachbarn == geburt_ueberleb[0][i]){
 							ueber = ueber +1;
 						}
 					}
 				}else{
-					for(int i = 0;geburt_ueberleb[1][i]!=NULL;i++){
+					for(int i = 0;geburt_ueberleb[1][i]!=127;i++){
 						if(nachbarn == geburt_ueberleb[1][i]){
 							ueber = ueber +1;
 						}
